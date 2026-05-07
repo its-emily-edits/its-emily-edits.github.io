@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Emy Traynor — UGC Creator</title>
+<meta name="description" content="UGC creator based in Vancouver. Authentic short-form content for maker, MMA, and lifestyle brands." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --bg: #F4F1EA;
+    --bg-card: #EDE8DE;
+    --ink: #1A1714;
+    --ink-soft: #4A453E;
+    --ink-muted: #8C857B;
+    --line: #D9D2C4;
+    --accent: #B8462E;
+    --accent-soft: #D9624A;
+
+    --serif: "Instrument Serif", "Times New Roman", serif;
+    --sans: "DM Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, monospace;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--bg);
+    color: var(--ink);
+    font-size: 16px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* Subtle paper texture */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.35;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.04 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  }
+
+  a { color: inherit; text-decoration: none; }
+
+  ::selection { background: var(--accent); color: var(--bg); }
+
+  /* ─────────── NAV ─────────── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 24px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(244, 241, 234, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.3s ease;
+  }
+  nav.scrolled { border-bottom-color: var(--line); }
+
+  .nav-brand {
+    font-family: var(--serif);
+    font-size: 20px;
+    letter-spacing: -0.01em;
+  }
+  .nav-brand em { font-style: italic; color: var(--accent); }
+
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    font-family: var(--mono);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .nav-links a {
+    position: relative;
+    padding: 4px 0;
+    color: var(--ink-soft);
+    transition: color 0.2s;
+  }
+  .nav-links a::after {
+    content: "";
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 0; height: 1px;
+    background: var(--accent);
+    transition: width 0.3s ease;
+  }
+  .nav-links a:hover { color: var(--ink); }
+  .nav-links a:hover::after { width: 100%; }
+
+  @media (max-width: 720px) {
+    nav { padding: 18px 24px; }
+    .nav-links { gap: 18px; }
+    .nav-links a:nth-child(2) { display: none; }
+  }
+
+  /* ─────────── LAYOUT ─────────── */
+  section {
+    position: relative;
+    z-index: 2;
+    padding: 0 40px;
+  }
+  @media (max-width: 720px) { section { padding: 0 24px; } }
+
+  .container { max-width: 1320px; margin: 0 auto; }
+
+  .label {
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--ink-muted);
+  }
+
+  /* ─────────── HERO ─────────── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 120px;
+    padding-bottom: 80px;
+  }
+
+  .hero-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 60px;
+    gap: 40px;
+  }
+
+  .hero-meta .label-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .hero-meta .label-group .value {
+    font-family: var(--sans);
+    font-size: 14px;
+    color: var(--ink);
+    text-transform: none;
+    letter-spacing: 0;
+  }
+
+  .hero h1 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(64px, 11vw, 180px);
+    line-height: 0.92;
+    letter-spacing: -0.025em;
+    margin-bottom: 40px;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .hero-bottom {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 40px;
+    align-items: end;
+    padding-top: 40px;
+    border-top: 1px solid var(--line);
+  }
+  @media (max-width: 720px) {
+    .hero-bottom { grid-template-columns: 1fr; }
+    .hero-meta { flex-direction: column; gap: 18px; margin-bottom: 40px; }
+  }
+
+  .hero-tagline {
+    font-family: var(--serif);
+    font-size: clamp(22px, 2.6vw, 30px);
+    line-height: 1.3;
+    max-width: 620px;
+    color: var(--ink-soft);
+  }
+  .hero-tagline em { font-style: italic; color: var(--ink); }
+
+  .cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 24px;
+    background: var(--ink);
+    color: var(--bg);
+    font-family: var(--mono);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    border-radius: 999px;
+    transition: background 0.25s ease, transform 0.25s ease;
+    white-space: nowrap;
+    cursor: pointer;
+    border: none;
+  }
+  .cta:hover { background: var(--accent); transform: translateY(-2px); }
+  .cta .arrow { transition: transform 0.3s ease; }
+  .cta:hover .arrow { transform: translate(2px, -2px); }
+
+  /* Marquee strip */
+  .marquee {
+    overflow: hidden;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    padding: 18px 0;
+    background: var(--bg-card);
+    position: relative;
+    z-index: 2;
+  }
+  .marquee-track {
+    display: flex;
+    gap: 60px;
+    white-space: nowrap;
+    animation: scroll 38s linear infinite;
+    font-family: var(--serif);
+    font-size: 22px;
+    font-style: italic;
+    color: var(--ink-soft);
+  }
+  .marquee-track span { display: flex; align-items: center; gap: 60px; }
+  .marquee-track .dot { color: var(--accent); }
+  @keyframes scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* ─────────── SECTION HEADERS ─────────── */
+  .section-head {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    gap: 40px;
+    align-items: baseline;
+    padding: 100px 0 50px;
+    border-top: 1px solid var(--line);
+  }
+  .section-head h2 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(40px, 5.5vw, 76px);
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+  .section-head h2 em { font-style: italic; color: var(--accent); }
+  @media (max-width: 720px) {
+    .section-head { grid-template-columns: 1fr; gap: 16px; padding: 70px 0 36px; }
+  }
+
+  /* ─────────── WORK GRID ─────────── */
+  .work-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 24px;
+    padding-bottom: 40px;
+  }
+
+  .work-card {
+    position: relative;
+    aspect-ratio: 9 / 16;
+    background: var(--bg-card);
+    border-radius: 4px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  .work-card:hover { transform: translateY(-6px); }
+
+  /* Editorial asymmetric layout */
+  .work-card:nth-child(1) { grid-column: span 4; }
+  .work-card:nth-child(2) { grid-column: span 4; margin-top: 60px; }
+  .work-card:nth-child(3) { grid-column: span 4; }
+  .work-card:nth-child(4) { grid-column: span 4; margin-top: 30px; }
+  .work-card:nth-child(5) { grid-column: span 4; }
+  .work-card:nth-child(6) { grid-column: span 4; margin-top: 50px; }
+
+  @media (max-width: 900px) {
+    .work-card:nth-child(n) { grid-column: span 6; margin-top: 0; }
+  }
+  @media (max-width: 600px) {
+    .work-card:nth-child(n) { grid-column: span 12; }
+  }
+
+  /* Placeholder gradient backgrounds — replace with <video> tags */
+  .work-card .placeholder {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--bg-card), #C8BFAE);
+  }
+  .work-card:nth-child(1) .placeholder { background: linear-gradient(135deg, #1a1714, #4a453e); }
+  .work-card:nth-child(2) .placeholder { background: linear-gradient(135deg, #b8462e, #d9624a); }
+  .work-card:nth-child(3) .placeholder { background: linear-gradient(135deg, #c8bfae, #ede8de); }
+  .work-card:nth-child(4) .placeholder { background: linear-gradient(135deg, #2d2823, #6b5d4f); }
+  .work-card:nth-child(5) .placeholder { background: linear-gradient(135deg, #d9d2c4, #b5a892); }
+  .work-card:nth-child(6) .placeholder { background: linear-gradient(135deg, #4a453e, #b8462e); }
+
+  .work-card .placeholder-text {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 18px;
+    color: rgba(244, 241, 234, 0.7);
+    text-align: center;
+    padding: 0 20px;
+  }
+
+  .work-info {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    padding: 20px;
+    background: linear-gradient(to top, rgba(26,23,20,0.9), transparent);
+    color: var(--bg);
+    transform: translateY(8px);
+    opacity: 0.9;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+  .work-card:hover .work-info { transform: translateY(0); opacity: 1; }
+
+  .work-info .work-brand {
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    opacity: 0.7;
+    margin-bottom: 4px;
+  }
+  .work-info .work-title {
+    font-family: var(--serif);
+    font-size: 18px;
+    font-style: italic;
+  }
+
+  .play-btn {
+    position: absolute;
+    top: 16px; right: 16px;
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: rgba(244, 241, 234, 0.15);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(244, 241, 234, 0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .play-btn svg { fill: var(--bg); }
+
+  /* ─────────── NICHES ─────────── */
+  .niches {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    margin: 60px 0;
+  }
+  .niche {
+    padding: 50px 30px;
+    border-right: 1px solid var(--line);
+    transition: background 0.3s ease;
+  }
+  .niche:last-child { border-right: none; }
+  .niche:hover { background: var(--bg-card); }
+
+  .niche-num {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink-muted);
+    margin-bottom: 24px;
+  }
+  .niche h3 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(28px, 3vw, 38px);
+    line-height: 1.05;
+    letter-spacing: -0.015em;
+    margin-bottom: 14px;
+  }
+  .niche h3 em { font-style: italic; color: var(--accent); }
+  .niche p {
+    font-size: 14px;
+    color: var(--ink-soft);
+    line-height: 1.55;
+  }
+
+  @media (max-width: 720px) {
+    .niches { grid-template-columns: 1fr; }
+    .niche { border-right: none; border-bottom: 1px solid var(--line); }
+    .niche:last-child { border-bottom: none; }
+  }
+
+  /* ─────────── ABOUT ─────────── */
+  .about {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+    padding: 80px 0;
+  }
+  @media (max-width: 900px) { .about { grid-template-columns: 1fr; gap: 40px; } }
+
+  .about-prose {
+    font-family: var(--serif);
+    font-size: clamp(22px, 2.4vw, 28px);
+    line-height: 1.4;
+    color: var(--ink-soft);
+  }
+  .about-prose em { font-style: italic; color: var(--ink); }
+  .about-prose p + p { margin-top: 24px; }
+
+  .about-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .stat {
+    padding: 24px 0;
+    border-bottom: 1px solid var(--line);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 20px;
+    align-items: baseline;
+  }
+  .stat:first-child { border-top: 1px solid var(--line); }
+  .stat-label {
+    font-family: var(--mono);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--ink-muted);
+  }
+  .stat-value {
+    font-family: var(--serif);
+    font-size: 26px;
+  }
+  .stat-value em { font-style: italic; color: var(--accent); }
+
+  /* ─────────── CONTACT ─────────── */
+  .contact {
+    padding: 140px 0 80px;
+    border-top: 1px solid var(--line);
+    text-align: center;
+  }
+  .contact .label { display: block; margin-bottom: 30px; }
+  .contact h2 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(56px, 9vw, 140px);
+    line-height: 0.95;
+    letter-spacing: -0.025em;
+    margin-bottom: 50px;
+  }
+  .contact h2 em { font-style: italic; color: var(--accent); }
+
+  .email-link {
+    display: inline-block;
+    font-family: var(--serif);
+    font-size: clamp(24px, 3vw, 36px);
+    font-style: italic;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--ink);
+    transition: color 0.25s, border-color 0.25s;
+  }
+  .email-link:hover { color: var(--accent); border-color: var(--accent); }
+
+  .socials {
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    font-family: var(--mono);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+  .socials a {
+    color: var(--ink-soft);
+    padding-bottom: 2px;
+    border-bottom: 1px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .socials a:hover { color: var(--accent); border-color: var(--accent); }
+
+  footer {
+    padding: 30px 40px;
+    border-top: 1px solid var(--line);
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    position: relative;
+    z-index: 2;
+  }
+  @media (max-width: 600px) { footer { flex-direction: column; gap: 8px; } }
+
+  /* ─────────── REVEAL ANIMATIONS ─────────── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.9s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.9s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  .stagger > * {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .stagger.visible > * { opacity: 1; transform: translateY(0); }
+  .stagger.visible > *:nth-child(1) { transition-delay: 0.05s; }
+  .stagger.visible > *:nth-child(2) { transition-delay: 0.15s; }
+  .stagger.visible > *:nth-child(3) { transition-delay: 0.25s; }
+  .stagger.visible > *:nth-child(4) { transition-delay: 0.35s; }
+  .stagger.visible > *:nth-child(5) { transition-delay: 0.45s; }
+  .stagger.visible > *:nth-child(6) { transition-delay: 0.55s; }
+</style>
+</head>
+<body>
+
+<!-- ─────────── NAV ─────────── -->
+<nav id="nav">
+  <div class="nav-brand">Emy <em>T.</em></div>
+  <div class="nav-links">
+    <a href="#work">Work</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<!-- ─────────── HERO ─────────── -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-meta reveal">
+      <div class="label-group">
+        <span class="label">Based in</span>
+        <span class="value">Vancouver, BC</span>
+      </div>
+      <div class="label-group">
+        <span class="label">Discipline</span>
+        <span class="value">UGC · Short-form video</span>
+      </div>
+      <div class="label-group">
+        <span class="label">Status</span>
+        <span class="value">Open to collabs · 2026</span>
+      </div>
+    </div>
+
+    <h1 class="reveal">
+      Content that<br>
+      doesn't look<br>
+      like <em>content.</em>
+    </h1>
+
+    <div class="hero-bottom reveal">
+      <p class="hero-tagline">
+        I'm Emy — a software engineer, maker, and Muay Thai trainee making <em>authentic, scroll-stopping</em> short-form video for brands in maker, MMA, and lifestyle.
+      </p>
+      <a href="#contact" class="cta">
+        Let's work
+        <svg class="arrow" width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <path d="M2 12L12 2M12 2H4M12 2V10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── MARQUEE ─────────── -->
+<div class="marquee">
+  <div class="marquee-track">
+    <span>Maker brands <span class="dot">●</span> MMA &amp; combat sports <span class="dot">●</span> Tech &amp; productivity <span class="dot">●</span> Lifestyle &amp; home <span class="dot">●</span> Small-batch / indie <span class="dot">●</span></span>
+    <span>Maker brands <span class="dot">●</span> MMA &amp; combat sports <span class="dot">●</span> Tech &amp; productivity <span class="dot">●</span> Lifestyle &amp; home <span class="dot">●</span> Small-batch / indie <span class="dot">●</span></span>
+  </div>
+</div>
+
+<!-- ─────────── WORK ─────────── -->
+<section id="work">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="label">01 — Work</span>
+      <h2>Selected <em>pieces.</em></h2>
+    </div>
+
+    <div class="work-grid stagger">
+      <div class="work-card">
+        <div class="placeholder"><span class="placeholder-text">replace with<br>video 01</span></div>
+        <div class="play-btn"><svg width="10" height="10" viewBox="0 0 10 10"><path d="M0 0L10 5L0 10Z"/></svg></div>
+        <div class="work-info">
+          <div class="work-brand">Spec · Gaiadama</div>
+          <div class="work-title">Gear that earns its place</div>
+        </div>
+      </div>
+      <div class="work-card">
+        <div class="placeholder"><span class="placeholder-text">replace with<br>video 02</span></div>
+        <div class="play-btn"><svg width="10" height="10" viewBox="0 0 10 10"><path d="M0 0L10 5L0 10Z"/></svg></div>
+        <div class="work-info">
+          <div class="work-brand">Tinker Studio</div>
+          <div class="work-title">Apartment maker, day in the life</div>
+        </div>
+      </div>
+      <div class="work-card">
+        <div class="placeholder"><span class="placeholder-text">replace with<br>video 03</span></div>
+        <div class="play-btn"><svg width="10" height="10" viewBox="0 0 10 10"><path d="M0 0L10 5L0 10Z"/></svg></div>
+        <div class="work-info">
+          <div class="work-brand">Spec · Maker tools</div>
+          <div class="work-title">Unboxing &amp; first impressions</div>
+        </div>
+      </div>
+      <div class="work-card">
+        <div class="placeholder"><span class="placeholder-text">replace with<br>video 04</span></div>
+        <div class="play-btn"><svg width="10" height="10" viewBox="0 0 10 10"><path d="M0 0L10 5L0 10Z"/></svg></div>
+        <div class="work-info">
+          <div class="work-brand">Spec · MMA</div>
+          <div class="work-title">Gym bag essentials</div>
+        </div>
+      </div>
+      <div class="work-card">
+        <div class="placeholder"><span class="placeholder-text">replace with<br>video 05</span></div>
+        <div class="play-btn"><svg width="10" height="10" viewBox="0 0 10 10"><path d="M0 0L10 5L0 10Z"/></svg></div>
+        <div class="work-info">
+          <div class="work-brand">Tinker Studio</div>
+          <div class="work-title">From idea to Etsy listing</div>
+        </div>
+      </div>
+      <div class="work-card">
+        <div class="placeholder"><span class="placeholder-text">replace with<br>video 06</span></div>
+        <div class="play-btn"><svg width="10" height="10" viewBox="0 0 10 10"><path d="M0 0L10 5L0 10Z"/></svg></div>
+        <div class="work-info">
+          <div class="work-brand">Spec · Lifestyle</div>
+          <div class="work-title">Small-space, big output</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─────────── NICHES ─────────── -->
+    <div class="niches reveal">
+      <div class="niche">
+        <div class="niche-num">— 01</div>
+        <h3>Maker &amp; <em>DIY</em></h3>
+        <p>3D printers, Cricuts, sticker shops, small-batch tools. I run my own studio (Tinker Studio) so this isn't roleplay.</p>
+      </div>
+      <div class="niche">
+        <div class="niche-num">— 02</div>
+        <h3>MMA &amp; <em>combat</em></h3>
+        <p>Muay Thai, boxing, jiu-jitsu — multiple sessions a week. Gear, supplements, recovery, training-day vlogs.</p>
+      </div>
+      <div class="niche">
+        <div class="niche-num">— 03</div>
+        <h3>Tech &amp; <em>tools</em></h3>
+        <p>SWE by day. Productivity apps, dev tools, AI products, smart home — explained without the jargon.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── ABOUT ─────────── -->
+<section id="about">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="label">02 — About</span>
+      <h2>The <em>short</em> version.</h2>
+    </div>
+
+    <div class="about">
+      <div class="about-prose reveal">
+        <p>I make videos in the same apartment where I run my Etsy shop, train Muay Thai between meetings, and ship code for a content platform.</p>
+        <p>The result is content that <em>actually sounds like a person</em> — because I'm not performing the niche, I'm in it.</p>
+        <p>If you're a brand whose product would feel right next to a Bambu Lab printer, a pair of shin pads, or a second monitor — let's talk.</p>
+      </div>
+
+      <div class="about-stats reveal">
+        <div class="stat"><span class="stat-label">Turnaround</span><span class="stat-value"><em>5–7</em> days</span></div>
+        <div class="stat"><span class="stat-label">Formats</span><span class="stat-value">Reels · TikTok · Shorts</span></div>
+        <div class="stat"><span class="stat-label">Deliverables</span><span class="stat-value">Raw + edited</span></div>
+        <div class="stat"><span class="stat-label">Usage rights</span><span class="stat-value">Negotiable</span></div>
+        <div class="stat"><span class="stat-label">Based</span><span class="stat-value"><em>Vancouver,</em> BC</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── CONTACT ─────────── -->
+<section id="contact" class="contact">
+  <div class="container reveal">
+    <span class="label">03 — Contact</span>
+    <h2>Let's make<br>something <em>good.</em></h2>
+    <a href="mailto:hello@example.com" class="email-link">hello@example.com</a>
+    <div class="socials">
+      <a href="#" target="_blank" rel="noopener">Instagram ↗</a>
+      <a href="#" target="_blank" rel="noopener">TikTok ↗</a>
+      <a href="#" target="_blank" rel="noopener">Rate card ↗</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>© 2026 Emy Traynor</span>
+  <span>Site v1.0 · Vancouver</span>
+</footer>
+
+<script>
+  // Nav border on scroll
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 30);
+  });
+
+  // Reveal on scroll
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: "0px 0px -60px 0px" });
+
+  document.querySelectorAll('.reveal, .stagger').forEach(el => io.observe(el));
+
+  // Trigger hero immediately
+  window.addEventListener('load', () => {
+    document.querySelectorAll('.hero .reveal').forEach((el, i) => {
+      setTimeout(() => el.classList.add('visible'), 80 + i * 120);
+    });
+  });
+</script>
+
+</body>
+</html>
