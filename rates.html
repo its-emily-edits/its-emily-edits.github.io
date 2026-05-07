@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Rate Card — Emily Traynor</title>
+<meta name="description" content="UGC rate card. Vancouver-based creator for maker, MMA, and software brands." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --bg: #F4F1EA;
+    --bg-card: #EDE8DE;
+    --ink: #1A1714;
+    --ink-soft: #4A453E;
+    --ink-muted: #8C857B;
+    --line: #D9D2C4;
+    --accent: #6CB4F8;
+    --accent-soft: #C7E0FF;
+
+    --serif: "Instrument Serif", "Times New Roman", serif;
+    --sans: "DM Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, monospace;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--sans);
+    background: var(--bg);
+    color: var(--ink);
+    font-size: 16px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: "";
+    position: fixed; inset: 0;
+    pointer-events: none; z-index: 1;
+    opacity: 0.35;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.04 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  }
+
+  a { color: inherit; text-decoration: none; }
+  ::selection { background: var(--accent); color: var(--bg); }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 100; padding: 24px 40px;
+    display: flex; justify-content: space-between; align-items: center;
+    background: rgba(244, 241, 234, 0.85);
+    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.3s ease;
+  }
+  nav.scrolled { border-bottom-color: var(--line); }
+  .nav-brand { font-family: var(--serif); font-size: 20px; letter-spacing: -0.01em; }
+  .nav-brand em { font-style: italic; color: var(--accent); }
+  .nav-back {
+    font-family: var(--mono); font-size: 12px;
+    text-transform: uppercase; letter-spacing: 0.08em;
+    color: var(--ink-soft);
+    display: inline-flex; align-items: center; gap: 8px;
+    transition: color 0.2s;
+  }
+  .nav-back:hover { color: var(--accent); }
+  @media (max-width: 720px) { nav { padding: 18px 24px; } }
+
+  section { position: relative; z-index: 2; padding: 0 40px; }
+  @media (max-width: 720px) { section { padding: 0 24px; } }
+  .container { max-width: 1180px; margin: 0 auto; }
+
+  .label {
+    font-family: var(--mono); font-size: 11px;
+    text-transform: uppercase; letter-spacing: 0.14em;
+    color: var(--ink-muted);
+  }
+
+  /* HERO */
+  .hero {
+    padding-top: 160px; padding-bottom: 80px;
+    border-bottom: 1px solid var(--line);
+  }
+  .hero-meta {
+    display: flex; gap: 60px;
+    margin-bottom: 50px;
+    flex-wrap: wrap;
+  }
+  .hero-meta .label-group { display: flex; flex-direction: column; gap: 6px; }
+  .hero-meta .value {
+    font-family: var(--sans); font-size: 14px; color: var(--ink);
+  }
+  .hero h1 {
+    font-family: var(--serif); font-weight: 400;
+    font-size: clamp(60px, 9vw, 140px);
+    line-height: 0.92; letter-spacing: -0.025em;
+    margin-bottom: 30px;
+  }
+  .hero h1 em { font-style: italic; color: var(--accent); }
+  .hero-tagline {
+    font-family: var(--serif);
+    font-size: clamp(20px, 2.4vw, 26px);
+    line-height: 1.4; max-width: 680px;
+    color: var(--ink-soft);
+  }
+  .hero-tagline em { font-style: italic; color: var(--ink); }
+
+  /* SECTION */
+  .section-head {
+    display: grid; grid-template-columns: 100px 1fr;
+    gap: 40px; align-items: baseline;
+    padding: 90px 0 50px;
+  }
+  .section-head h2 {
+    font-family: var(--serif); font-weight: 400;
+    font-size: clamp(36px, 4.5vw, 60px);
+    line-height: 1; letter-spacing: -0.02em;
+  }
+  .section-head h2 em { font-style: italic; color: var(--accent); }
+  @media (max-width: 720px) {
+    .section-head { grid-template-columns: 1fr; gap: 16px; padding: 60px 0 30px; }
+  }
+
+  /* PACKAGES */
+  .packages {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  .pkg {
+    padding: 50px 36px 40px;
+    border-right: 1px solid var(--line);
+    position: relative;
+    transition: background 0.3s ease;
+  }
+  .pkg:last-child { border-right: none; }
+  .pkg:hover { background: var(--bg-card); }
+  .pkg.featured { background: var(--bg-card); }
+  .pkg.featured::before {
+    content: "Most popular";
+    position: absolute;
+    top: 18px; right: 18px;
+    font-family: var(--mono); font-size: 10px;
+    text-transform: uppercase; letter-spacing: 0.1em;
+    color: var(--accent);
+    padding: 5px 10px;
+    border: 1px solid var(--accent);
+    border-radius: 999px;
+  }
+
+  .pkg-num {
+    font-family: var(--mono); font-size: 11px;
+    color: var(--ink-muted); margin-bottom: 16px;
+  }
+  .pkg-name {
+    font-family: var(--serif); font-weight: 400;
+    font-size: clamp(28px, 2.6vw, 34px);
+    line-height: 1.05; letter-spacing: -0.015em;
+    margin-bottom: 24px;
+  }
+  .pkg-name em { font-style: italic; color: var(--accent); }
+
+  .pkg-price {
+    font-family: var(--serif);
+    font-size: 56px; line-height: 1;
+    margin-bottom: 4px; letter-spacing: -0.02em;
+  }
+  .pkg-price .currency {
+    font-size: 24px; vertical-align: super;
+    color: var(--ink-soft); margin-right: 2px;
+  }
+  .pkg-unit {
+    font-family: var(--mono); font-size: 11px;
+    text-transform: uppercase; letter-spacing: 0.1em;
+    color: var(--ink-muted); margin-bottom: 28px;
+  }
+
+  .pkg-list {
+    list-style: none; margin-top: 28px;
+    padding-top: 24px; border-top: 1px solid var(--line);
+  }
+  .pkg-list li {
+    font-size: 14px; color: var(--ink-soft);
+    padding: 8px 0;
+    display: flex; align-items: flex-start; gap: 10px;
+  }
+  .pkg-list li::before {
+    content: "→"; color: var(--accent); flex-shrink: 0;
+  }
+
+  @media (max-width: 900px) {
+    .packages { grid-template-columns: 1fr; }
+    .pkg { border-right: none; border-bottom: 1px solid var(--line); }
+    .pkg:last-child { border-bottom: none; }
+  }
+
+  /* ADD-ONS */
+  .addons-intro {
+    max-width: 680px;
+    font-family: var(--serif); font-style: italic;
+    font-size: clamp(18px, 2vw, 22px);
+    color: var(--ink-soft); line-height: 1.5;
+    margin-bottom: 50px;
+  }
+
+  .addon-row {
+    display: grid;
+    grid-template-columns: 60px 1fr auto;
+    gap: 30px;
+    align-items: baseline;
+    padding: 28px 0;
+    border-top: 1px solid var(--line);
+    transition: padding 0.3s ease;
+  }
+  .addon-row:last-child { border-bottom: 1px solid var(--line); }
+  .addon-row:hover { padding-left: 12px; }
+
+  .addon-num {
+    font-family: var(--mono); font-size: 12px;
+    color: var(--ink-muted);
+  }
+  .addon-body h4 {
+    font-family: var(--serif); font-weight: 400;
+    font-size: clamp(22px, 2.4vw, 28px);
+    line-height: 1.15; letter-spacing: -0.01em;
+    margin-bottom: 6px;
+  }
+  .addon-body h4 em { font-style: italic; color: var(--accent); }
+  .addon-body p {
+    font-size: 14px; color: var(--ink-soft);
+    max-width: 580px;
+  }
+  .addon-price {
+    font-family: var(--serif); font-size: 26px;
+    color: var(--ink); white-space: nowrap;
+    text-align: right;
+  }
+  .addon-price em { font-style: italic; color: var(--accent); }
+  .addon-price .small {
+    font-family: var(--mono); font-size: 10px;
+    text-transform: uppercase; letter-spacing: 0.08em;
+    color: var(--ink-muted); display: block;
+    font-style: normal; margin-top: 4px;
+  }
+
+  @media (max-width: 720px) {
+    .addon-row { grid-template-columns: 1fr; gap: 8px; padding: 24px 0; }
+    .addon-num { display: none; }
+    .addon-price { text-align: left; padding-top: 8px; }
+  }
+
+  /* HIGHLIGHT BOX (the personal-IG one) */
+  .addon-row.highlight {
+    background: var(--bg-card);
+    margin: 0 -24px;
+    padding: 28px 24px;
+    border-radius: 4px;
+    border-top: 1px solid var(--accent);
+    border-bottom: 1px solid var(--accent) !important;
+    position: relative;
+  }
+  .addon-row.highlight::before {
+    content: "★";
+    position: absolute;
+    top: 14px; right: 16px;
+    color: var(--accent); font-size: 16px;
+  }
+
+  /* PROCESS */
+  .process {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  .step {
+    padding: 40px 24px;
+    border-right: 1px solid var(--line);
+  }
+  .step:last-child { border-right: none; }
+  .step-num {
+    font-family: var(--mono); font-size: 11px;
+    color: var(--ink-muted); margin-bottom: 18px;
+  }
+  .step h4 {
+    font-family: var(--serif); font-weight: 400;
+    font-size: 24px; line-height: 1.1;
+    margin-bottom: 10px; letter-spacing: -0.01em;
+  }
+  .step h4 em { font-style: italic; color: var(--accent); }
+  .step p {
+    font-size: 13px; color: var(--ink-soft); line-height: 1.5;
+  }
+  @media (max-width: 720px) {
+    .process { grid-template-columns: 1fr 1fr; }
+    .step { border-bottom: 1px solid var(--line); }
+    .step:nth-child(even) { border-right: none; }
+    .step:nth-last-child(-n+2) { border-bottom: none; }
+  }
+  @media (max-width: 480px) {
+    .process { grid-template-columns: 1fr; }
+    .step { border-right: none; border-bottom: 1px solid var(--line); }
+    .step:last-child { border-bottom: none; }
+  }
+
+  /* TERMS */
+  .terms {
+    columns: 2; column-gap: 60px;
+    font-size: 14px; color: var(--ink-soft);
+    line-height: 1.6;
+  }
+  .terms p { margin-bottom: 18px; break-inside: avoid; }
+  .terms strong { color: var(--ink); font-weight: 500; }
+  @media (max-width: 720px) { .terms { columns: 1; } }
+
+  /* CTA */
+  .cta-section {
+    padding: 140px 0 80px;
+    border-top: 1px solid var(--line);
+    text-align: center;
+  }
+  .cta-section .label { display: block; margin-bottom: 30px; }
+  .cta-section h2 {
+    font-family: var(--serif); font-weight: 400;
+    font-size: clamp(50px, 8vw, 110px);
+    line-height: 0.95; letter-spacing: -0.025em;
+    margin-bottom: 50px;
+  }
+  .cta-section h2 em { font-style: italic; color: var(--accent); }
+  .email-link {
+    display: inline-block;
+    font-family: var(--serif);
+    font-size: clamp(22px, 2.6vw, 32px);
+    font-style: italic;
+    padding-bottom: 6px; border-bottom: 1px solid var(--ink);
+    transition: color 0.25s, border-color 0.25s;
+  }
+  .email-link:hover { color: var(--accent); border-color: var(--accent); }
+
+  footer {
+    padding: 30px 40px; border-top: 1px solid var(--line);
+    display: flex; justify-content: space-between;
+    font-family: var(--mono); font-size: 11px;
+    color: var(--ink-muted);
+    text-transform: uppercase; letter-spacing: 0.08em;
+    position: relative; z-index: 2;
+  }
+  @media (max-width: 600px) { footer { flex-direction: column; gap: 8px; } }
+
+  /* REVEAL */
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.9s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.9s cubic-bezier(0.2, 0.8, 0.2, 1); }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <a href="index.html" class="nav-brand">Emily <em>T.</em></a>
+  <a href="index.html" class="nav-back">
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+      <path d="M12 2L2 12M2 12H10M2 12V4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+    </svg>
+    Back to portfolio
+  </a>
+</nav>
+
+<section class="hero">
+  <div class="container">
+    <div class="hero-meta reveal">
+      <div class="label-group">
+        <span class="label">Effective</span>
+        <span class="value">2026 · Q2 onward</span>
+      </div>
+      <div class="label-group">
+        <span class="label">Currency</span>
+        <span class="value">USD (CAD on request)</span>
+      </div>
+      <div class="label-group">
+        <span class="label">Document</span>
+        <span class="value">v1.0</span>
+      </div>
+    </div>
+
+    <h1 class="reveal">Rate <em>card.</em></h1>
+
+    <p class="hero-tagline reveal">
+      Pricing for short-form UGC deliverables — TikTok, Reels, Shorts.
+      Quotes are <em>indicative</em>; final number depends on usage rights, exclusivity, and turnaround.
+    </p>
+  </div>
+</section>
+
+<!-- ─────────── PACKAGES ─────────── -->
+<section>
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="label">01 — Packages</span>
+      <h2>Core <em>deliverables.</em></h2>
+    </div>
+
+    <div class="packages reveal">
+
+      <div class="pkg">
+        <div class="pkg-num">— 01</div>
+        <div class="pkg-name">Single <em>video</em></div>
+        <div class="pkg-price"><span class="currency">$</span>150</div>
+        <div class="pkg-unit">USD · Per deliverable</div>
+        <ul class="pkg-list">
+          <li>1 scripted, shot + edited video</li>
+          <li>15–90 seconds</li>
+          <li>2 rounds of revisions</li>
+        </ul>
+      </div>
+
+      <div class="pkg featured">
+        <div class="pkg-num">— 02</div>
+        <div class="pkg-name">Three <em>videos</em></div>
+        <div class="pkg-price"><span class="currency">$</span>500</div>
+        <div class="pkg-unit">USD · $167 / video</div>
+        <ul class="pkg-list">
+          <li>3 scripted, shot + edited videos</li>
+          <li>15–90 seconds each</li>
+          <li>2 rounds per video</li>
+        </ul>
+      </div>
+
+      <div class="pkg">
+        <div class="pkg-num">— 03</div>
+        <div class="pkg-name">Five <em>videos</em></div>
+        <div class="pkg-price"><span class="currency">$</span>750</div>
+        <div class="pkg-unit">USD · $150 / video</div>
+        <ul class="pkg-list">
+          <li>5 scripted, shot + edited videos</li>
+          <li>15–90 seconds each</li>
+          <li>2 rounds per video</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── ADD-ONS ─────────── -->
+<section>
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="label">02 — Add-ons</span>
+      <h2>Stack as <em>needed.</em></h2>
+    </div>
+
+    <p class="addons-intro reveal">
+      Base packages cover organic use on the brand's owned channels.
+      <em>Anything beyond that</em> — paid ads, my own audience, exclusivity — gets priced separately so you only pay for what you need.
+    </p>
+
+    <div class="addons reveal">
+
+      <div class="addon-row">
+        <div class="addon-num">— 01</div>
+        <div class="addon-body">
+          <h4>Paid <em>promotion</em></h4>
+          <p>Use the videos in paid ads (Meta, TikTok, YouTube, etc.)</p>
+        </div>
+        <div class="addon-price">+ <em>50%</em> of base<span class="small">per 30 days</span></div>
+      </div>
+
+      <!-- ⭐ The personal-IG cross-post -->
+      <div class="addon-row highlight">
+        <div class="addon-num">— 02</div>
+        <div class="addon-body">
+          <h4>Cross-post to my <em>Instagram</em></h4>
+          <p>I'll repost the video to my personal Instagram stories or feed (with attribution).</p>
+        </div>
+        <div class="addon-price">+ <em>$150</em><span class="small">USD · scales w/ audience</span></div>
+      </div>
+
+      <div class="addon-row">
+        <div class="addon-num">— 03</div>
+        <div class="addon-body">
+          <h4>TikTok <em>repost</em> to my account</h4>
+          <p>Share the video on my personal TikTok (with clear attribution to the brand).</p>
+        </div>
+        <div class="addon-price">+ <em>$100</em><span class="small">USD · or $200 bundled w/ IG</span></div>
+      </div>
+
+      <div class="addon-row">
+        <div class="addon-num">— 04</div>
+        <div class="addon-body">
+          <h4><em>Exclusivity</em> window</h4>
+          <p>I won't create similar content for competing brands in your category for an agreed period.</p>
+        </div>
+        <div class="addon-price">+ <em>30%</em> of base<span class="small">90 days</span></div>
+      </div>
+
+      <div class="addon-row">
+        <div class="addon-num">— 05</div>
+        <div class="addon-body">
+          <h4>Fast <em>turnaround</em></h4>
+          <p>Rush delivery (3–5 business days instead of 10–14). Requires clear brief + existing product.</p>
+        </div>
+        <div class="addon-price">+ <em>25%</em> of base</div>
+      </div>
+
+      <div class="addon-row">
+        <div class="addon-num">— 06</div>
+        <div class="addon-body">
+          <h4>Product <em>consultation</em></h4>
+          <p>1:1 call to refine brief, positioning, or how the product fits my authentic use.</p>
+        </div>
+        <div class="addon-price">+ <em>$75</em><span class="small">USD</span></div>
+      </div>
+
+      <div class="addon-row">
+        <div class="addon-num">— 07</div>
+        <div class="addon-body">
+          <h4>Alternative <em>hooks</em> or <em>angles</em></h4>
+          <p>Get 3–5 variations of the same video (different angles, hooks, or energy) instead of unique concepts.</p>
+        </div>
+        <div class="addon-price">+ <em>$100–$200</em><span class="small">depending on scope</span></div>
+      </div>
+
+      <div class="addon-row">
+        <div class="addon-num">— 08</div>
+        <div class="addon-body">
+          <h4>Testimonial or product <em>unboxing</em></h4>
+          <p>Longer-form, more structured format (30–120 seconds). Includes initial unpack video + one follow-up use case.</p>
+        </div>
+        <div class="addon-price">+ <em>$50–$150</em><span class="small">depending on depth</span></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── PROCESS ─────────── -->
+<section>
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="label">03 — Process</span>
+      <h2>How it <em>works.</em></h2>
+    </div>
+
+    <div class="process reveal">
+      <div class="step">
+        <div class="step-num">01</div>
+        <h4>Brief &amp; <em>quote</em></h4>
+        <p>You send a brief, I'll respond with a custom quote based on scope, exclusivity, and timeline.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <h4><em>Deposit</em> &amp; logistics</h4>
+        <p>50% upfront, balance due on delivery. You ship product or provide direction; I handle rest.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <h4>Shoot &amp; <em>edit</em></h4>
+        <p>I'll film, edit, and deliver within the agreed turnaround. Typically 10–14 days from product arrival.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">04</div>
+        <h4>Revisions &amp; <em>launch</em></h4>
+        <p>Deliver draft, you request changes (up to 2 rounds included). Then you post, promote, or archive.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── TERMS ─────────── -->
+<section>
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="label">04 — Fine print</span>
+      <h2>Terms &amp; <em>notes.</em></h2>
+    </div>
+
+    <div class="terms reveal">
+      <p><strong>Pricing.</strong> All prices in USD unless noted. CAD quotes available on request — I work with both Canadian and US brands.</p>
+
+      <p><strong>Usage rights.</strong> Base packages include organic use on the brand's owned channels in perpetuity. Anything else — paid ads, third-party placements, my personal channels — is an add-on.</p>
+
+      <p><strong>Exclusivity.</strong> Without the exclusivity add-on, I retain the right to make content for non-direct-competitor brands at any time.</p>
+
+      <p><strong>Revisions.</strong> Two rounds of revisions per video are included. Additional revisions are $50/round. Major creative pivots after approval may trigger a re-quote.</p>
+
+      <p><strong>Turnaround.</strong> Standard turnaround starts when product is in-hand. Add 7–10 days buffer for shipping to Vancouver.</p>
+
+      <p><strong>Disclosure.</strong> I follow FTC and Canadian Competition Bureau disclosure rules on any content where I'm tagged or where the brand is identifiable. Brands cannot ask me to omit disclosure.</p>
+
+      <p><strong>Cancellation.</strong> Deposits are non-refundable once shooting has begun. Pre-shoot cancellations: 50% of deposit refunded.</p>
+
+      <p><strong>Volume / agency rates.</strong> Talk to me. Repeat clients and agencies booking 5+ videos/month get retainer pricing.</p>
+
+      <p><strong>Indicative pricing.</strong> Numbers above are my standard rates for typical UGC briefs. Final quotes account for scope, complexity, and ongoing relationship — feel free to ask.</p>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <div class="container reveal">
+    <span class="label">Get a quote</span>
+    <h2>Tell me about<br>your <em>brief.</em></h2>
+    <a href="mailto:hello@example.com?subject=UGC%20brief" class="email-link">hello@example.com</a>
+  </div>
+</section>
+
+<footer>
+  <span>© 2026 Emily Traynor</span>
+  <span>Rate card v1.0 · Vancouver</span>
+</footer>
+
+<script>
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 30);
+  });
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, { threshold: 0.1, rootMargin: "0px 0px -40px 0px" });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  window.addEventListener('load', () => {
+    document.querySelectorAll('.hero .reveal').forEach((el, i) => {
+      setTimeout(() => el.classList.add('visible'), 80 + i * 120);
+    });
+  });
+</script>
+
+</body>
+</html>
