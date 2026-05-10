@@ -572,7 +572,7 @@
       <div class="label-group"><span class="label">Status</span><span class="value">Open to collabs · 2026</span></div>
     </div>
 
-    <h1 class="reveal">Content that's<br><em>authentic. 1</em></h1>
+    <h1 class="reveal">Content that's<br><em>authentic.</em></h1>
 
     <div class="hero-bottom reveal">
       <p class="hero-tagline">
@@ -1058,7 +1058,25 @@
     const videoSrc = card.dataset.video;
     const thumbSrc = card.dataset.thumb;
 
-    // If there's a video source, create a video element
+    // Always add thumbnail image first if available
+    if (thumbSrc) {
+      const img = document.createElement('img');
+      img.src = thumbSrc;
+      img.className = 'thumb';
+      img.alt = '';
+      img.style.position = 'absolute';
+      img.style.top = '0';
+      img.style.left = '0';
+      img.style.right = '0';
+      img.style.bottom = '0';
+      img.style.width = '100%';
+      img.style.height = '100%';
+      img.style.objectFit = 'cover';
+      img.style.zIndex = '1';
+      card.appendChild(img);
+    }
+
+    // If there's a video source, create a video element on top
     if (videoSrc) {
       const video = document.createElement('video');
       video.src = videoSrc;
@@ -1066,36 +1084,26 @@
       video.loop = true;
       video.playsInline = true;
       video.preload = 'metadata';
+      video.style.opacity = '0';
+      video.style.zIndex = '2';
 
-      if (thumbSrc) {
-        video.poster = thumbSrc;
-      }
+      card.appendChild(video);
 
-      card.insertBefore(video, card.firstChild);
-
-      // Play on hover
+      // Play on hover and show video
       card.addEventListener('mouseenter', () => {
         video.play().catch(() => {});
+        video.style.opacity = '1';
       });
 
       card.addEventListener('mouseleave', () => {
         video.pause();
         video.currentTime = 0;
+        video.style.opacity = '0';
       });
+    }
 
-      const ph = card.querySelector('.placeholder');
-      if (ph) ph.remove();
-    }
-    // If only thumbnail, use that
-    else if (thumbSrc) {
-      const img = document.createElement('img');
-      img.src = thumbSrc;
-      img.className = 'thumb';
-      img.alt = '';
-      card.insertBefore(img, card.firstChild);
-      const ph = card.querySelector('.placeholder');
-      if (ph) ph.remove();
-    }
+    const ph = card.querySelector('.placeholder');
+    if (ph) ph.remove();
   }
 
   // Load all video cards
